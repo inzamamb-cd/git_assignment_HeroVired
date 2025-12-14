@@ -237,3 +237,62 @@ While working on `feature/sqrt`, a critical bug is reported in the `divide` func
     ```
 
 3.  **Create Release v2.0.0:** On your Git hosting platform, create a new release with the tag **`v2.0.0`** and the title "Version 2 - Square Root Feature and Bug Fix".
+
+
+# 📁 git_assignment_HeroVired: Git LFS Integration
+
+This repository branch (`lfs`) demonstrates the efficient management of large binary files using **Git Large File Storage (Git LFS)**.
+
+This setup is specifically tailored for **macOS** users and ensures files over 200MB are tracked using LFS pointers, rather than bloating the main Git history.
+
+---
+
+## 🛠️ Prerequisites (macOS)
+
+Before cloning or contributing, ensure you have Git LFS installed on your system.
+
+### 1. Install Git LFS
+
+We recommend using **Homebrew** for installation on macOS:
+
+1.  **Install Homebrew** (if not already installed).
+2.  **Install Git LFS:**
+    ```bash
+    brew install git-lfs
+    ```
+3.  **Initialize LFS:** Run this command once in your Terminal to hook LFS into your Git environment:
+    ```bash
+    git lfs install
+    ```
+
+---
+
+## 🚀 Workflow: Adding a Large File (200MB+)
+
+This section outlines how the large file (`large_binary_file.zip`) was added to the repository.
+
+### 1. Create and Switch to the `lfs` Branch
+
+```bash
+git checkout -b lfs
+
+# Tell Git LFS to track all files matching the pattern (e.g., *.zip)
+git lfs track "*.zip"
+
+# The .gitattributes file must be committed to the main repository history:
+git add .gitattributes
+git commit -m "Configure Git LFS to track .zip files for large assets"
+
+Place your file (Env_Canada_2025_10.exe.zip) into the repository directory. When git add is executed, Git recognizes the file extension and automatically replaces the large file content with a small text pointer in the staging area.
+
+# Add the 200MB+ file to the staging area
+git add lEnv_Canada_2025_10.exe.zip
+
+# Commit the file. The commit contains the LFS pointer, not the 200MB+ data.
+git commit -m "Add large binary file (200MB+) via Git LFS"
+
+git push -u origin lfs
+
+# Successful output will show a message similar to:
+# "Uploading LFS objects: 100% (1/1), 215 MB | 1.8 MB/s, done"
+
